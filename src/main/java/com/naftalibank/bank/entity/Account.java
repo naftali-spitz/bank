@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -36,6 +38,7 @@ public class Account {
 
     private String createdAt;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "accounts")
     private Set<AccountHolder> accountHolders = new HashSet<>();
 

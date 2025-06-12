@@ -59,7 +59,10 @@ public class AccountHolder {
     private String createdAt;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "account_holder_account", joinColumns = @JoinColumn(name = "account_holder_id"), inverseJoinColumns = @JoinColumn(name = "account_id"))
+    @JoinTable(
+        name = "account_holder_account", 
+        joinColumns = @JoinColumn(name = "account_holder_id"), 
+        inverseJoinColumns = @JoinColumn(name = "account_id"))
     private Set<Account> accounts;
 
     public AccountHolder() {
