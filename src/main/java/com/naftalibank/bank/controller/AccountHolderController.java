@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.naftalibank.bank.entity.Account;
 import com.naftalibank.bank.entity.AccountHolder;
 import com.naftalibank.bank.repository.AccountHolderRepository;
 import com.naftalibank.bank.repository.AccountRepository;
@@ -20,11 +19,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class AccountHolderController {
     
     private final AccountHolderRepository accountHolderRepository;
-    private final AccountRepository accountRepository;
 
     public AccountHolderController(AccountHolderRepository accountHolderRepository, AccountRepository accountRepository) {
         this.accountHolderRepository = accountHolderRepository;
-        this.accountRepository = accountRepository;
     }
 
     @PostMapping
@@ -33,8 +30,8 @@ public class AccountHolderController {
     }
 
     @GetMapping
-    public List<Account> getAccountHolders() {
-        return accountRepository.findAll();
+    public List<AccountHolder> getAccountHolders() {
+        return accountHolderRepository.findAll();
     }
     
     @GetMapping("/{id}")
