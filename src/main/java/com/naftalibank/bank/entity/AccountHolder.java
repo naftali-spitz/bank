@@ -16,7 +16,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "account holder")
+@Table(name = "account_holder")
 
 public class AccountHolder {
     public enum IdType {
@@ -26,7 +26,7 @@ public class AccountHolder {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -58,7 +58,7 @@ public class AccountHolder {
 
     private String createdAt;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }) // TODO better understand this
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "account_holder_account", joinColumns = @JoinColumn(name = "account_holder_id"), inverseJoinColumns = @JoinColumn(name = "account_id"))
     private Set<Account> accounts;
 

@@ -5,20 +5,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "account")
 public class Account {
     public enum CurrencyType {
         USD, EUR, GBP
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "account_number", unique = true, nullable = false)
@@ -26,7 +30,7 @@ public class Account {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "currency_type", nullable = false)
-    private String currencyType;
+    private CurrencyType currency;
 
     private BigDecimal balance;
 
@@ -54,12 +58,12 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public String getCurrencyType() {
-        return currencyType;
+    public CurrencyType getCurrencyType() {
+        return currency;
     }
 
-    public void setCurrencyType(String currencyType) {
-        this.currencyType = currencyType;
+    public void setCurrencyType(CurrencyType currencyType) {
+        this.currency = currencyType;
     }
 
     public BigDecimal getBalance() {
