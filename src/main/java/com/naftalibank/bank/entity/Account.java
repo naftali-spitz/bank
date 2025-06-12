@@ -16,9 +16,9 @@ public class Account {
     public enum CurrencyType {
         USD, EUR, GBP
     }
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID )
+    @GeneratedValue(strategy = GenerationType.UUID)
     private Long id;
 
     @Column(name = "account_number", unique = true, nullable = false)
@@ -29,7 +29,7 @@ public class Account {
     private String currencyType;
 
     private BigDecimal balance;
-    
+
     private String createdAt;
 
     @ManyToMany(mappedBy = "accounts")
@@ -95,7 +95,5 @@ public class Account {
         this.accountHolders.remove(accountHolder);
         accountHolder.getAccounts().remove(this);
     }
-
-    
 
 }
