@@ -13,14 +13,14 @@ import com.naftalibank.bank.repository.AccountRepository;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
-
 @RestController
 @RequestMapping("api/account_holder")
 public class AccountHolderController {
-    
+
     private final AccountHolderRepository accountHolderRepository;
 
-    public AccountHolderController(AccountHolderRepository accountHolderRepository, AccountRepository accountRepository) {
+    public AccountHolderController(AccountHolderRepository accountHolderRepository,
+            AccountRepository accountRepository) {
         this.accountHolderRepository = accountHolderRepository;
     }
 
@@ -33,15 +33,10 @@ public class AccountHolderController {
     public List<AccountHolder> getAccountHolders() {
         return accountHolderRepository.findAll();
     }
-    
+
     @GetMapping("/{id}")
     public AccountHolder getAccountHolderById(Long id) {
-        return accountHolderRepository.findById(id).orElse(null);                
+        return accountHolderRepository.findById(id).orElse(null);
     }
 
-
-
-
-    
-        
 }
