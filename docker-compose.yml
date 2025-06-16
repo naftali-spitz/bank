@@ -1,0 +1,8 @@
+services:
+  bank:
+    image: bank
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
