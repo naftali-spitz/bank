@@ -9,3 +9,7 @@ INSERT INTO account_holder (id, holder_id_type, holder_id, first_name, last_name
 INSERT INTO account_holder_account (account_holder_id, account_id) VALUES
   (1, 1),
   (2, 2);
+
+ALTER TABLE account_holder ALTER COLUMN id RESTART WITH 3;
+
+ALTER TABLE account ALTER COLUMN id RESTART WITH 3;
