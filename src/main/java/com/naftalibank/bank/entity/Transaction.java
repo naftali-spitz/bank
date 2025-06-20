@@ -21,6 +21,13 @@ public class Transaction {
         WITHDRAWAL
     }
 
+    public enum TransactionStatus {
+        PENDING,
+        COMPLETED,
+        FAILED,
+        CANCELLED
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +38,16 @@ public class Transaction {
     
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "ref_number", unique = true, nullable = false)
+    private String refNumber;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private TransactionStatus status;
     
     @Column(name = "created_at", nullable = false)
     private String createdAt;
@@ -52,6 +69,30 @@ public class Transaction {
 
     public TransactionType getType() {
         return type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getRefNumber() {
+        return refNumber;
+    }
+
+    public void setRefNumber(String refNumber) {
+        this.refNumber = refNumber;
+    }
+
+    public TransactionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TransactionStatus status) {
+        this.status = status;
     }
 
     public void setType(TransactionType type) {
