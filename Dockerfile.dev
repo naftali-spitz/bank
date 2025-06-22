@@ -1,0 +1,26 @@
+# Use a Maven base image that includes OpenJDK 21 (Eclipse Temurin distribution) and Maven itself
+FROM maven:3.9.6-eclipse-temurin-21 AS base
+
+WORKDIR /app
+
+# Copy pom.xml and download dependencies first to leverage Docker layer caching.
+# This step only re-runs if your pom.xml changes.
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# EXCLUDE THE FOLLOWING LINE:
+# ENV JAVA_TOOL_OPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+
+# Set up for Spring Boot DevTools.
+ENV SPRING_DEVTOOLS_RESTART_ENABLED=true
+ENV SPRING_DEVTOOLS_RESTART_POLL_INTERVAL=2000
+ENV SPRING_DEVTOOLS_RESTART_QUIET_PERIOD=1000
+
+# Expose the application port and the debugger port
+EXPOSE 8080
+EXPOSE 5005
+
+# CMD to run your Spring Boot application using Maven,
+# passing the JVM arguments correctly to the app's JVM.
+CMD ["mvn", "spring-boot:run", \
+     "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'"]

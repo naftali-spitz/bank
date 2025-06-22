@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.naftalibank.bank.entity.AccountHolder;
 import com.naftalibank.bank.repository.AccountHolderRepository;
 import com.naftalibank.bank.repository.AccountRepository;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("api/account_holder")
@@ -27,6 +30,11 @@ public class AccountHolderController {
     public AccountHolder createAccountHolder(@RequestBody AccountHolder accountHolder) {
         return accountHolderRepository.save(accountHolder);
     }
+
+    @PutMapping("path/{id}")
+    public AccountHolder updateAccountHolder(@PathVariable Long id, @RequestBody AccountHolder accountHolder) {
+        
+    }}
 
     @GetMapping
     public List<AccountHolder> getAccountHolders() {
