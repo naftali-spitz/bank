@@ -31,10 +31,10 @@ public class AccountHolderController {
         return accountHolderRepository.save(accountHolder);
     }
 
-    @PutMapping("path/{id}")
+    @PutMapping("/{id}")
     public AccountHolder updateAccountHolder(@PathVariable Long id, @RequestBody AccountHolder accountHolder) {
-        
-    }}
+        return accountHolderRepository.save(accountHolder);
+    }
 
     @GetMapping
     public List<AccountHolder> getAccountHolders() {

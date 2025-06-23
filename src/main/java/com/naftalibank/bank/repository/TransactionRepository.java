@@ -1,5 +1,9 @@
 package com.naftalibank.bank.repository;
 
-public interface TransactionRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.naftalibank.bank.entity.Transaction;
+
+public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+
 }
