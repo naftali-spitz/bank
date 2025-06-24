@@ -136,35 +136,9 @@
         </div>
       </section>
       <div class="cta">
-        <a href="/login">Login</a>
-        <a href="/register">Open an Account</a>
-        <button onclick="showCreateAccountForm()">Create Account</button>
+        <a href="/login.html">Login</a>
+        <a href="/register.html">Open an Account</a>
       </div>
-      <form class="create-account-form" method="post" action="/create-account">
-        <label>
-          Full Name
-          <input type="text" name="fullName" required />
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Account Type
-          <select name="accountType" required>
-            <option value="">Select type</option>
-            <option value="savings">Savings</option>
-            <option value="checking">Checking</option>
-            <option value="business">Business</option>
-          </select>
-        </label>
-        <div class="form-actions">
-          <button type="button" onclick="hideCreateAccountForm()">
-            Cancel
-          </button>
-          <button type="submit">Create</button>
-        </div>
-      </form>
     </main>
     <footer>&copy; 2025 Naftali Bank. All rights reserved.</footer>
   </body>
