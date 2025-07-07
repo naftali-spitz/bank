@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Naftali Bank Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f8fb; /* Lighter background for dashboard */
+        margin: 0;
+        padding: 0;
+        display: flex; /* Use flexbox for main layout */
+        min-height: 100vh;
+      }
+      header {
+        background: #2a5298;
+        color: #fff;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(42, 82, 152, 0.1);
+        width: 100%;
+        position: fixed; /* Fixed header */
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        height: 60px; /* Fixed height for header */
+        box-sizing: border-box;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        letter-spacing: 0.5px;
+      }
+      .user-info {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .user-info a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 1rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 5px;
+        transition: background 0.2s;
+      }
+      .user-info a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      nav.sidebar {
+        background: #333d4f; /* Darker sidebar */
+        color: #fff;
+        width: 220px;
+        padding-top: 80px; /* Space for fixed header */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        flex-shrink: 0; /* Prevent sidebar from shrinking */
+      }
+      nav.sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      nav.sidebar ul li a {
+        display: block;
+        padding: 1rem 1.5rem;
+        color: #e0eafc;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+        border-left: 5px solid transparent; /* For active state */
+      }
+      nav.sidebar ul li a:hover {
+        background: #4a566a;
+        color: #fff;
+      }
+      nav.sidebar ul li.active a {
+        background: #2a5298; /* Active link background */
+        border-left-color: #fff; /* Active link border */
+        color: #fff;
+      }
+
+      .main-content {
+        flex-grow: 1; /* Main content takes remaining space */
+        padding: 2rem;
+        padding-top: 80px; /* Space for fixed header */
+        overflow-y: auto; /* Enable scrolling for content */
+      }
+      .dashboard-section {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+      .dashboard-section h2 {
+        color: #2a5298;
+        margin-top: 0;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.8rem;
+      }
+
+      .account-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+      .account-card {
+        background: #e0eafc;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+      }
+      .account-card h3 {
+        color: #2a5298;
+        margin-top: 0;
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+      .account-card .balance {
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #0d47a1;
+        margin-top: 1rem;
+      }
+      .account-card .balance span {
+        font-size: 1.2rem;
+        font-weight: normal;
+        margin-left: 0.2rem;
+      }
+
+      .recent-transactions ul {
+        list-style: none;
+        padding: 0;
+      }
+      .recent-transactions li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.8rem 0;
+        border-bottom: 1px dashed #eee;
+        font-size: 1.1rem;
+      }
+      .recent-transactions li:last-child {
+        border-bottom: none;
+      }
+      .transaction-amount.credit {
+        color: #28a745; /* Green for income */
+        font-weight: 600;
+      }
+      .transaction-amount.debit {
+        color: #dc3545; /* Red for expenses */
+        font-weight: 600;
+      }
+
+      .quick-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .quick-actions .action-btn {
+        background: #2a5298;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.2s;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      .quick-actions .action-btn:hover {
+        background: #1e3c72;
+      }
+
+      footer {
+        text-align: center;
+        color: #888;
+        padding: 1.5rem 0 1rem 0;
+        font-size: 0.95rem;
+        width: 100%;
+        margin-top: auto; /* Pushes footer to bottom if content is short */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Naftali Bank</h1>
+      <div class="user-info">
+        Welcome, Naftali!
+        <a href="index.html">Logout</a>
+      </div>
+    </header>
+
+    <nav class="sidebar">
+      <ul>
+        <li class="active"><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="#">Accounts</a></li>
+        <li><a href="#">Transactions</a></li>
+        <li><a href="#">Transfers</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </nav>
+
+    <div class="main-content">
+      <section class="dashboard-section">
+        <h2>Account Summary</h2>
+        <div class="account-summary">
+          <div class="account-card">
+            <h3>Checking Account</h3>
+            <p class="balance">$5,230.50<span> USD</span></p>
+            <p>Acc No: **** 1234</p>
+          </div>
+          <div class="account-card">
+            <h3>Savings Account</h3>
+            <p class="balance">$12,890.75<span> USD</span></p>
+            <p>Acc No: **** 5678</p>
+          </div>
+          <div class="account-card">
+            <h3>Business Account</h3>
+            <p class="balance">$7,500.00<span> USD</span></p>
+            <p>Acc No: **** 9012</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-section">
+        <h2>Recent Transactions</h2>
+        <div class="recent-transactions">
+          <ul>
+            <li>
+              <span>June 24, 2025 - Starbucks</span>
+              <span class="transaction-amount debit">-$15.20</span>
+            </li>
+            <li>
+              <span>June 23, 2025 - Salary Deposit</span>
+              <span class="transaction-amount credit">+$2,500.00</span>
+            </li>
+            <li>
+              <span>June 22, 2025 - Online Purchase</span>
+              <span class="transaction-amount debit">-$75.00</span>
+            </li>
+            <li>
+              <span>June 21, 2025 - ATM Withdrawal</span>
+              <span class="transaction-amount debit">-$100.00</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="dashboard-section">
+        <h2>Quick Actions</h2>
+        <div class="quick-actions">
+          <a href="#" class="action-btn">Transfer Funds</a>
+          <a href="#" class="action-btn">Pay Bills</a>
+          <a href="#" class="action-btn">View All Transactions</a>
+          <a href="#" class="action-btn">Open New Account</a>
+        </div>
+      </section>
+    </div>
+
+    <footer>&copy; 2025 Naftali Bank. All rights reserved.</footer>
+  </body>
+</html>
