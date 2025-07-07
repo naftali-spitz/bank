@@ -56,6 +56,10 @@ public class Transaction {
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
+    @ManyToOne
+    @JoinColumn(name = "holder_id", nullable = false)
+    private AccountHolder accountHolder;
+
     public Transaction() {
     }
 
@@ -121,5 +125,13 @@ public class Transaction {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public AccountHolder getAccountHolder() {
+        return accountHolder;
+    }
+
+    public void setAccountHolder(AccountHolder accountHolder) {
+        this.accountHolder = accountHolder;
     }
 }
