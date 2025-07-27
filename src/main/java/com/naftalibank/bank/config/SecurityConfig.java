@@ -19,6 +19,9 @@ public class SecurityConfig {
                 .requestMatchers("/account-holder/**").permitAll()
                 .requestMatchers("/account/**").permitAll()
                 .requestMatchers("/transaction/**").permitAll()
+                .requestMatchers("/login.html/**").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
             )
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
             .build();
