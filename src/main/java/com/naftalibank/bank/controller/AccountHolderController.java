@@ -26,7 +26,7 @@ public class AccountHolderController {
         this.accountHolderRepository = accountHolderRepository;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public AccountHolder createAccountHolder(@RequestBody AccountHolder accountHolder) {
         return accountHolderRepository.save(accountHolder);
     }
